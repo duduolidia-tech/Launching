@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdAn Labs - Launching Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background orb */
+        .background-orb {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(147, 112, 219, 0.4) 0%, rgba(138, 43, 226, 0.2) 30%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .logo {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 60px 50px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Email signup */
+        .email-section {
+            margin: 40px 0;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .email-input:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.3);
+        }
+
+        .notify-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #8a2be2, #9370db);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: lowercase;
+        }
+
+        .countdown-separator {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 2rem;
+            align-self: flex-start;
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .countdown {
+                gap: 20px;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .logo {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+
+            .background-orb {
+                width: 600px;
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+
+            .background-orb {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.5);
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-orb"></div>
+    
+    <div class="header">
+        <div class="logo">EdAn Labs</div>
+    </div>
+
+    <div class="container">
+        <h1>Launching Soon</h1>
+        <p class="subtitle">
+            Gain exclusive early access to our platform and<br>
+            stay informed about launch updates
+        </p>
+
+        <div class="email-section">
+            <form class="email-form" id="emailForm">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="your@email.com"
+                    id="emailInput"
+                    required
+                >
+                <button type="submit" class="notify-btn">Get Notified</button>
+            </form>
+            <div class="success-message" id="successMessage">
+                Thank you! We'll notify you when we launch.
+            </div>
+        </div>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">days</span>
+            </div>
+            <div class="countdown-separator">|</div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">hours</span>
+            </div>
+            <div class="countdown-separator">|</div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">minutes</span>
+            </div>
+            <div class="countdown-separator">|</div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Education Analytics Labs
+    </div>
+
+    <script>
+        // Set launch date (115 days from now)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 115);
+        
+        // Countdown function
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<h2 style="color: white;">We\'re Live!</h2>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Handle email form submission
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('emailInput').value;
+            
+            // Here you would normally send the email to your backend
+            // For now, just show success message
+            
+            document.getElementById('emailInput').style.display = 'none';
+            document.querySelector('.notify-btn').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // You can add code here to send email to a service like:
+            // - Mailchimp
+            // - ConvertKit  
+            // - A simple form service like Formspree
+            console.log('Email submitted:', email);
+        });
+    </script>
+</body>
+</html>
